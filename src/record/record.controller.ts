@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { RecordService } from './record.service';
 import { RecordDto } from './dto/record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('record')
 export class RecordController {
   constructor(private readonly recordService: RecordService) {}

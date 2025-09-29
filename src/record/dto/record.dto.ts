@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 
 import { IsDateString } from "class-validator";
 import { Period } from "generated/client";

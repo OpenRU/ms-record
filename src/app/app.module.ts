@@ -5,9 +5,10 @@ import { AppService } from './app.service';
 import { RecordModule } from 'src/record/record.module';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [PrismaModule, RecordModule],
+  imports: [PrismaModule, RecordModule, HttpModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
