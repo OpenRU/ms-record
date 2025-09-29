@@ -24,8 +24,8 @@ export class AuthGuard implements CanActivate{
             const msAuthUrl = this.configService.get<string>('MS_AUTH_URL')
             const response = await firstValueFrom(
                 this.httpService.post(
-                    `http://${msAuthUrl}/auth/validate-token/`,
-                    {token},
+                    `${msAuthUrl}/auth/validate-token`, 
+                     {token},
                 ),
             )
 
