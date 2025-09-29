@@ -3,10 +3,14 @@ import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 import { Http2ServerRequest } from 'http2';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthGuard implements CanActivate{
-    constructor(private readonly httpService: HttpService){}
+    constructor(
+        private readonly httpService: HttpService,
+        private readonly configService: ConfigService,
+    ){}
 
     async canActivate(context: ExecutionContext): Promise<boolean>{
         const request = context.switchToHttp().getRequest<Http2ServerRequest>()
@@ -17,9 +21,10 @@ export class AuthGuard implements CanActivate{
         }
 
         try{
+            const msAuthUrl = this.configService.get<string>('MS_AUTH_URL')
             const response = await firstValueFrom(
                 this.httpService.post(
-                    `${process.env.MS_AUTH_PREFIX}/validate-token}`,
+                    `http://${msAuthUrl}/auth/validate-token/`,
                     {token},
                 ),
             )
