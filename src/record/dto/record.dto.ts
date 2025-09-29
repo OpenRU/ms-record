@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-wrapper-object-types */
 /* eslint-disable prettier/prettier */
 
 import { IsDateString } from "class-validator";
