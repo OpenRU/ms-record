@@ -2,6 +2,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFillter } from './exceptions/fillters/http-exception.fillter';
 
 
 async function bootstrap() {
@@ -10,5 +11,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
   }))
+  app.useGlobalFilters(new HttpExceptionFillter())
 }
 bootstrap();
