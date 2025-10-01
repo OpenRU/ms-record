@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { ResponseRecordDto } from './dto/response-record.dto';
 import { RecordDto } from './dto/record.dto';
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
@@ -12,7 +13,7 @@ import { UpdateRecordDto } from './dto/update-record.dto';
 export class RecordService {
     constructor(private readonly PrismaService: PrismaService){}
 
-    async create(recordDto: RecordDto){
+    async create(recordDto: RecordDto): Promise<ResponseRecordDto>{
         const { user_id, period, menu_id,} = recordDto;
         const dateOnly = new Date(recordDto.timestamp,);
         const recordAlreadyExists = await this.PrismaService.record.findFirst({
@@ -36,12 +37,12 @@ export class RecordService {
         return createRecord;
     }
 
-    async showAllRecords(){
+    async showAllRecords(): Promise<ResponseRecordDto[]>{
         const allRecords = await this.PrismaService.record.findMany();
         return allRecords;
     }
 
-    async getRecord(id: number){
+    async getRecord(id: number): Promise<ResponseRecordDto>{
         if(!id){
             throw new IdEmptyException();
         }
@@ -57,7 +58,7 @@ export class RecordService {
         return oneRecord;
     }
 
-    async getHistory(user_id: string){
+    async getHistory(user_id: string): Promise<ResponseRecordDto[]>{
         const userHistory = await this.PrismaService.record.findMany({
             where:{
                 user_id
@@ -89,7 +90,7 @@ export class RecordService {
     return totalMealsByUser;
     }
 
-    async updateRecord(id: number, updateRecordDto: UpdateRecordDto ){
+    async updateRecord(id: number, updateRecordDto: UpdateRecordDto ): Promise<ResponseRecordDto>{
         const {user_id, menu_id, timestamp, period} = updateRecordDto;
         const record = await this.PrismaService.record.findUnique({
                 where: {
