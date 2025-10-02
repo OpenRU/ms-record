@@ -6,7 +6,7 @@ Este microsserviço tem como objetivo registrar as refeições servidas aos usu�
 
 - **Gerenciamento de itens**: Deve criar, visualizar, atualizar e excluir os registros de refeições feitas.
 - **Campos do registro:**
-  - ID do Usuário
+  - ID do Usuário (Gerado automaticamente)
   - ID do Cardápio Consumido
   - Data da Refeição
   - Período da Refeição
